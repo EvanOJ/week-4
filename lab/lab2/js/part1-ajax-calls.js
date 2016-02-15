@@ -10,7 +10,9 @@
 
   This recipe, given to underscore's _.filter will return only the elements we want.
 ===================== */
-var isLengthOfFiveOrMore = function(str) {};
+var isLengthOfFiveOrMore = function(str) {
+  return str.length >= 5;
+};
 
 console.log("isLengthOfFiveOrMore success:",
   _.isEqual(_.filter(['this', 'is','a', 'test', 'testing'], isLengthOfFiveOrMore), ['testing']));
@@ -21,15 +23,15 @@ console.log("isLengthOfFiveOrMore success:",
   function you write along with underscore's _.each to log the double of every
   number in the provided array.
 ===================== */
-var logDouble = function(num) {};
+var logDouble = function(num) { console.log(num*2); };
 var theArray = [1, 5, 20, 100];
-
+var arrayDouble = _.each(theArray, logDouble);
 
 /* =====================
   Given this already defined function, define fizzbuzzArray so that, when mapped
   over, it will equal ['fizz', 'buzz', 'fizzbuzz'];
 ===================== */
-var fizzbuzzArray = [];
+var fizzbuzzArray = [9,25,15];
 var fizzbuzzFunc = function(num) {
   var str = '';
   if (num % 3 === 0) { str = 'fizz'; }
@@ -93,6 +95,31 @@ var phillyBikeCrashesDataUrl = "https://raw.githubusercontent.com/CPLN690-MUSA61
   Remember to call all code within the function body. Use console.log to make sure
   that this step is completed before moving on!
 ===================== */
+
+var request = function(inputURL) {
+  $.ajax(inputURL).done(function(dataFromUrl) {
+    var parsedDataFromUrl = JSON.parse(dataFromUrl);
+    console.log(parsedDataFromUrl);
+
+  var map = L.map('map', {
+    center: [39.9522, -75.1639],
+    zoom: 14
+  });
+  var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    subdomains: 'abcd',
+    minZoom: 0,
+    maxZoom: 20,
+    ext: 'png'
+  }).addTo(map);
+
+var mapDataFromURL = _.each(parsedDataFromUrl, function(x) {
+       L.marker([x.Y,x.X]).bindPopup(x.ADDRESS).openPopup().addTo(map);
+
+   });
+ });
+};
+request(phillySolarInstallationDataUrl);
 
 
 /* =====================

@@ -26,10 +26,11 @@
 /* =====================
   Define a resetMap function to remove markers from the map and clear the array of markers
 ===================== */
-var resetMap = function() {
-  /* =====================
-    Fill out this function definition
-  ===================== */
+/* CANT FIGURE OUT WHY THIS WONT REMOVE THE MARKERS AFTER EACH BUTTON PRESS!?*/
+var resetMap = function(filteredMarkers) {
+  return _.each(filteredMarkers, function(obj) {
+    map.removeLayer(obj);
+  });
 };
 
 /* =====================
@@ -38,9 +39,10 @@ var resetMap = function() {
   it down!
 ===================== */
 var getAndParseData = function() {
-  /* =====================
-    Fill out this function definition
-  ===================== */
+  var philaSolar = "https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/json/philadelphia-solar-installations.json";
+  $.ajax(philaSolar).done(function(response) {
+    parsedSolarData = JSON.parse(response);
+  });
 };
 
 /* =====================
@@ -48,7 +50,17 @@ var getAndParseData = function() {
   criteria happens to be — that's entirely up to you)
 ===================== */
 var plotData = function() {
-  /* =====================
-    Fill out this function definition
-  ===================== */
+  var minKw = numericField1;
+  var maxKw = numericField2;
+  // var inverter = booleanField;
+  var filterData = _.filter(parsedSolarData, function(obj) {
+    return obj.KW >= minKw && obj.KW <= maxKw;
+  });
+  filteredMarkers = _.map(filterData, function(obj){
+    var popUp = "Capacity: " + " " +obj.KW + " " + "Developer: " + obj.DEVELOPER + "Year Built: " + obj.YEARBUILT;
+    return L.marker([obj.Y,obj.X]).bindPopup(popUp);
+    });
+  _.each(filteredMarkers, function(x) {
+    x.addTo(map);
+  });
 };

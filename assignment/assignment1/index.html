@@ -41,13 +41,85 @@
     ====================== -->
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar-search">
 
       <!-- =====================
       Add HTML!
       ====================== -->
+      <button class="hide-filters-button">Hide Filters</button>
+      <h1> Filters </h1>
+      <h3>
+      <p> By Name </p>
+      </h3>
+
+      <form>
+        <input type = "text" name="school name">
+        <input class = "submit" type = "submit">
+      </form>
+
+      <h3>
+      <p> By Grade </p>
+      </h3>
+
+      <select class="select-grade">
+        <option value="All Grades">All Grades</option>
+        <option value="High School">High School</option>
+        <option value="Elementary School">Elementary School</option>
+        <option value="K-4">K-4</option>
+        <option value="K-5">K-5</option>
+        <option value="K-8">K-8</option>
+        <option value="6-8">6-8</option>
+        <option value="9-12">9-12</option>
+      </select>
+    </div>
+
+    <div class ="school-results">
+<hr>
+      <h1>
+        <p>Schools</p>
+      </h1>
+
+      <table id="table1">
+        <tr class="important-row">
+          <td>Henry, Charles W.</td>
+        </tr>
+        <tr class="gray-row">
+          <td>Elem/Middle</td>
+        </tr>
+        <tr class="unimportant-row">
+          <td>601 Carpenter La.</td>
+        </tr>
+        <tr class="unimportant-row">
+          <td>19119-3405</td>
+        </tr>
+      </table>
+<br>
+      <table id="table2">
+        <tr>
+          <td class="important-row">Universal Creighton Charter School</td>
+        </tr>
+        <tr>
+          <td class="gray-row">Elem/Middle</td>
+        </tr>
+        <tr>
+          <td class="unimportant-row">5401 Tabor Ave</td>
+        </tr>
+        <tr>
+          <td class="unimportant-row">19120-3614</td>
+        </tr>
+      </table>
+<br>
+      <table id="table3">
+        <tr>
+          <td class="important-row">Marshall,John</td>
+        </tr>
+        <tr>
+          <td class="gray-row">Elementary School</td>
+        </tr>
+      </table>
 
     </div>
+
     <!-- Map -->
     <div id="map" class="map"></div>
 
